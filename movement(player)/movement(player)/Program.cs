@@ -13,7 +13,7 @@ namespace movement_player_
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new Helldorado2.Game1())
                 game.Run();
         }
     }

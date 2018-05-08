@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/mans.viking/documents/visual studio 2017/Projects/movement(player)/movement(player)/Content/wall123.jpeg</SourceFile>
+  <SourceFile>C:/Users/mans.viking/Documents/GitHub/Helldorado2.0/movement(player)/movement(player)/Content/wall123.jpeg</SourceFile>
   <SourceTime>2018-04-13T13:29:36.0005892+02:00</SourceTime>
-  <DestFile>C:/Users/mans.viking/documents/visual studio 2017/Projects/movement(player)/movement(player)/Content/bin/DesktopGL/wall123.xnb</DestFile>
-  <DestTime>2018-04-13T13:30:43.9615148+02:00</DestTime>
+  <DestFile>C:/Users/mans.viking/Documents/GitHub/Helldorado2.0/movement(player)/movement(player)/Content/bin/DesktopGL/wall123.xnb</DestFile>
+  <DestTime>2018-05-08T12:03:55.9577058+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

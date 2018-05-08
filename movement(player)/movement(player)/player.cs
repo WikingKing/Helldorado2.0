@@ -12,6 +12,7 @@ namespace movement_player_
 {
     class Player
     {
+
         Texture2D texture;
         Rectangle rectangle;
         Vector2 MoveDir;

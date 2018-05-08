@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace movement_player_
+namespace Helldorado2
 {
     /// <summary>
     /// This is the main type for your game.
@@ -12,8 +12,8 @@ namespace movement_player_
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D Bannanatextur;
-        Rectangle Bannanarectangle;
+        Texture2D PlayerTexture;
+        Rectangle PlayerRectangel;
         Vector2 MoveDir;
         Vector2 position;
         Vector2 scale;
@@ -36,14 +36,14 @@ namespace movement_player_
 
             IsMouseVisible = true;
             speed = 300;
-            Bannanarectangle = Bannanatextur.Bounds;
+            PlayerRectangel = PlayerTexture.Bounds;
             position = new Vector2(100, 100);
             MoveDir = Vector2.Zero;
             rotation = 0;
             scale = new Vector2(1, 1);
             BannanaColor = Color.White;
-            offset = (Bannanatextur.Bounds.Size.ToVector2() / 2.0f) * scale;
-            Bannanarectangle = new Rectangle((position - offset).ToPoint(), (Bannanatextur.Bounds.Size.ToVector2() * scale).ToPoint());
+            offset = (PlayerTexture.Bounds.Size.ToVector2() / 2.0f) * scale;
+            PlayerRectangel = new Rectangle((position - offset).ToPoint(), (PlayerTexture.Bounds.Size.ToVector2() * scale).ToPoint());
             wallRectange = walltextur.Bounds;
         }
         protected override void LoadContent()
@@ -53,7 +53,7 @@ namespace movement_player_
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Bannanatextur = Content.Load<Texture2D>("Bannana");
+            PlayerTexture = Content.Load<Texture2D>("Bannana");
             walltextur = Content.Load<Texture2D>("wall123");
         }
         protected override void UnloadContent()
@@ -63,30 +63,31 @@ namespace movement_player_
         protected override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            MouseState mousestate = Mouse.GetState();
-            Vector2 mousePos = mousestate.Position.ToVector2();
-            MoveDir = mousePos - position;
-            float pixelstoMove = speed * deltaTime;
-            if( MoveDir != Vector2.Zero)
+            KeyboardState keybordestade = Keyboard.GetState();
+            MoveDir = new Vector2();
+            if(keybordestade.IsKeyDown(Keys.Right))
+            {
+                MoveDir.X = 1;
+            }
+            if(keybordestade.IsKeyDown(Keys.Left))
+            {
+                MoveDir.X = -1;
+            }
+            if(keybordestade.IsKeyDown(Keys.Up))
+            {
+                MoveDir.Y = -1;
+            }
+            if(keybordestade.IsKeyDown(Keys.Down))
+            {
+                MoveDir.Y = 1;
+            }
+            if(MoveDir != Vector2.Zero)
             {
                 MoveDir.Normalize();
+                PlayerRectangel.Location += (MoveDir * speed * deltaTime).ToPoint();
+            }
 
-                rotation = (float)Math.Atan2(MoveDir.Y, MoveDir.X);
-                if(Vector2.Distance(position, mousePos) < pixelstoMove)
-                {
-                    position = mousePos;
-                }
-                else
-                {
-                    position += MoveDir * pixelstoMove;
-                }
-                Bannanarectangle.Location = (position - offset).ToPoint();
-            }
-            BannanaColor = Color.White;
-            if(Bannanarectangle.Intersects(wallRectange))
-            {
-                BannanaColor = Color.Blue;
-            }
+            
             base.Update(gameTime);
         }
 
@@ -101,7 +102,7 @@ namespace movement_player_
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(walltextur, wallRectange, Color.White);
-            spriteBatch.Draw(Bannanatextur, position, null, BannanaColor, rotation, offset, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(PlayerTexture, PlayerRectangel.Location.ToVector2(), null, BannanaColor, rotation, offset, scale, SpriteEffects.None, 0);
             
             spriteBatch.End();
 
